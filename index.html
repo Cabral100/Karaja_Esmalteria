@@ -174,6 +174,49 @@
         .gallery-item:hover .overlay { opacity: 1; transform: translateY(0); }
         .overlay h3 { font-family: var(--font-titulo); font-size: 1.8rem; }
 
+        /* === NOVA SEÇÃO FAQ === */
+        #faq { padding: 100px 0; background-color: var(--cor-fundo); }
+        #faq h2 { text-align: center; font-family: var(--font-titulo); font-size: 3rem; color: var(--cor-principal); margin-bottom: 60px; }
+        .faq-accordion { max-width: 800px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid #ddd; }
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 25px 20px;
+            font-family: var(--font-texto);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--cor-principal);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+        .faq-question:hover { background-color: #f7f3eb; }
+        .faq-question::after {
+            content: '\f067'; /* Font Awesome plus icon */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--cor-destaque);
+            transition: transform 0.3s ease-out;
+        }
+        .faq-question.active::after {
+             transform: rotate(135deg); /* Rotates plus to become a cross */
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0, 1, 0, 1), padding 0.5s;
+        }
+        .faq-answer p { padding: 0 20px 25px; line-height: 1.7; }
+        .faq-item.active .faq-answer {
+            max-height: 300px; /* Adjust as needed */
+            transition: max-height 1s cubic-bezier(1, 0, 1, 0);
+        }
+
         /* === SEÇÃO CONTATO === */
         #contato { padding: 100px 0; background-color: #f7f3eb; }
         .contato-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: center; background: var(--cor-clara); border-radius: 15px; overflow:hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.1);}
@@ -198,20 +241,73 @@
         .form-submit-btn { width: 100%; border: none; cursor: pointer; padding: 15px 35px; background-color: var(--cor-destaque); color: var(--cor-clara); text-decoration: none; border-radius: 50px; font-weight: 700; transition: all 0.3s; }
         .form-submit-btn:hover { background-color: var(--cor-principal); }
 
-        /* === RODAPÉ === */
-        .footer { background-color: var(--cor-verde-logo); color: rgba(255, 255, 255, 0.8); padding: 60px 0 20px; }
-        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; text-align: center; margin-bottom: 40px; align-items: center; }
-        .footer-col h4 { font-family: var(--font-titulo); font-size: 1.5rem; color: var(--cor-clara); margin-bottom: 15px; }
-        .footer-col ul { list-style: none; }
-        .footer-col ul li { margin-bottom: 10px; }
-        .footer-col ul a { text-decoration: none; color: rgba(255, 255, 255, 0.8); transition: color 0.3s; }
-        .footer-col ul a:hover { color: var(--cor-destaque); }
-        .footer-logo { font-family: var(--font-titulo); font-size: 2rem; color: var(--cor-clara); text-decoration: none; }
-        .footer-social a { color: var(--cor-clara); font-size: 1.5rem; margin: 0 10px; transition: color 0.3s, transform 0.3s; }
-        .footer-social a:hover { color: var(--cor-destaque); transform: translateY(-3px); }
-        .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.2); padding-top: 20px; text-align: center; font-size: 0.9rem; }
+        /* === NOVO RODAPÉ === */
+        .footer {
+            background-color: var(--cor-verde-logo);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 80px 0 20px;
+        }
+        .footer-main {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-about h2 {
+            font-family: var(--font-titulo);
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--cor-clara);
+            margin-bottom: 10px;
+        }
+        .footer-about p {
+            font-size: 1rem;
+            max-width: 400px;
+        }
+        .footer-links {
+            display: flex;
+            gap: 60px;
+        }
+        .footer-links ul {
+            list-style: none;
+        }
+        .footer-links h4 {
+            font-family: var(--font-titulo);
+            font-size: 1.5rem;
+            color: var(--cor-clara);
+            margin-bottom: 20px;
+        }
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: var(--cor-destaque);
+        }
+        .footer-social a {
+            color: var(--cor-clara);
+            font-size: 1.8rem;
+            margin-right: 20px;
+            transition: color 0.3s, transform 0.3s;
+            display: inline-block;
+        }
+        .footer-social a:hover {
+            color: var(--cor-destaque);
+            transform: translateY(-3px);
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
         .footer-bottom p { margin: 0; }
-        .footer-bottom a { color: var(--cor-destaque); text-decoration: none; }
+        .footer-bottom a { color: var(--cor-destaque); text-decoration: none; font-weight: 600; }
 
         /* === BOTÕES FLUTUANTES === */
         .floating-buttons { position: fixed; bottom: 30px; right: 30px; z-index: 999; display: flex; flex-direction: column; gap: 15px; }
@@ -231,16 +327,19 @@
             .filosofia-sticky-col { position: static; }
             .filosofia-image-container { height: 400px; margin-bottom: 40px; }
             .pilar-card { width: 90%; padding: 30px; }
+            .footer-main { flex-direction: column; text-align: center; }
+            .footer-links { justify-content: center; width: 100%;}
         }
 
         @media (max-width: 768px) {
             .header { padding: 10px 0; }
             .header .navbar > .nav-links { display: none; }
             .hamburger { display: block; }
+            .hero { background-attachment: scroll; /* <-- FIX PARA IMAGEM NO MOBILE */ }
             .hero h1 { font-size: 3rem; }
             .hero p { font-size: 1rem; }
-            #sobre, #pilares, #filosofia, #galeria, #contato { padding: 60px 0; }
-            .sobre-texto h2, #pilares h2, #filosofia h2, #galeria h2, .contato-info h2 { font-size: 2.5rem; }
+            #sobre, #pilares, #filosofia, #galeria, #contato, #faq { padding: 60px 0; }
+            .sobre-texto h2, #pilares h2, #filosofia h2, #galeria h2, .contato-info h2, #faq h2 { font-size: 2.5rem; }
             .gallery-container { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; height: auto; }
             .gallery-item { height: 250px; }
             .gallery-item:hover { flex: 1; }
@@ -249,6 +348,7 @@
             .pilar-content p { max-width: 100%; }
             .contato-wrapper { gap: 0; }
             .contato-info, .contact-form-container { padding: 30px; }
+            .footer-links { flex-direction: column; gap: 30px; text-align: center; }
         }
     </style>
 </head>
@@ -257,7 +357,7 @@
     <header class="header">
         <nav class="navbar container">
             <a href="#" class="logo-text">
-               Karajá Esmalteria
+                Karajá Esmalteria
             </a>
             <ul class="nav-links">
                 <li><a href="#sobre">Quem Sou</a></li>
@@ -364,6 +464,46 @@
                 </div>
             </div>
         </section>
+        
+        <section id="faq">
+            <div class="container">
+                <h2 class="animate-on-scroll">Perguntas Frequentes</h2>
+                <div class="faq-accordion animate-on-scroll">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>O que é o alongamento em fibra de vidro?</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>É uma técnica de alongamento que utiliza fios de fibra de vidro para criar uma base fina, leve e extremamente resistente sobre a unha natural. O resultado é um alongamento com aparência muito natural e de alta durabilidade.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>O alongamento danifica as unhas naturais?</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Não! Quando a aplicação e a manutenção são feitas por uma profissional qualificada e com produtos de qualidade, o alongamento protege a unha natural, permitindo que ela cresça forte e saudável por baixo.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Quanto tempo dura o alongamento?</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>A durabilidade é um dos pontos fortes! Recomendo a manutenção a cada 15 a 21 dias para manter a estrutura e a beleza do alongamento, acompanhando o crescimento natural das suas unhas.</p>
+                        </div>
+                    </div>
+                     <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Como devo cuidar das minhas unhas com alongamento?</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Os cuidados são simples: evite usar as unhas como ferramentas, hidrate as cutículas diariamente com óleo específico e nunca tente remover o alongamento em casa. Seguindo as orientações, suas unhas ficarão perfeitas até a próxima manutenção.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <section id="contato">
             <div class="container contato-wrapper animate-on-scroll">
@@ -414,31 +554,36 @@
     </div>
 
     <footer class="footer">
-        <div class="container footer-content">
-            <div class="footer-col footer-logo">
-                <a href="#" class="footer-logo">Karajá Esmalteria</a>
-                <p style="font-size: 0.9rem; margin-top: 10px;">Arte, ancestralidade e autoestima.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Navegação</h4>
-                <ul>
-                    <li><a href="#sobre">Quem Sou</a></li>
-                    <li><a href="#pilares">Pilares</a></li>
-                    <li><a href="#galeria">Galeria</a></li>
-                    <li><a href="#contato">Contato</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Siga-nos</h4>
-                <div class="footer-social">
-                    <a href="https://www.instagram.com/karajaesmalteria/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-about">
+                    <h2>Karajá Esmalteria</h2>
+                    <p>Conectando arte, ancestralidade e autoestima em cada detalhe. A força das suas raízes na ponta dos seus dedos.</p>
+                </div>
+                <div class="footer-links">
+                    <div>
+                        <h4>Navegação</h4>
+                        <ul>
+                            <li><a href="#sobre">Quem Sou</a></li>
+                            <li><a href="#pilares">Pilares</a></li>
+                            <li><a href="#galeria">Galeria</a></li>
+                            <li><a href="#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Social</h4>
+                        <div class="footer-social">
+                            <a href="https://www.instagram.com/karajaesmalteria/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Karajá Esmalteria. Todos os direitos reservados. | Desenvolvido por <a href="https://api.whatsapp.com/send?phone=5511960573657&text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20os%20seus%20serviços" target="_blank">Lucas Cabral</a></p>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Karajá Esmalteria. Todos os direitos reservados. | Desenvolvido por <a href="https://api.whatsapp.com/send?phone=5511960573657&text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20os%20seus%20serviços" target="_blank">Lucas Cabral</a></p>
+            </div>
         </div>
     </footer>
+
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -508,6 +653,22 @@
                 });
             });
         }
+        
+        // NOVO SCRIPT PARA O FAQ
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const currentlyActive = document.querySelector('.faq-item.active');
+                if (currentlyActive && currentlyActive !== item) {
+                    currentlyActive.classList.remove('active');
+                    currentlyActive.querySelector('.faq-question').classList.remove('active');
+                }
+
+                item.classList.toggle('active');
+                question.classList.toggle('active');
+            });
+        });
     });
     </script>
 </body>
