@@ -22,12 +22,13 @@
             --cor-fundo: #FDFBF5;
             --cor-texto: #333333;
             --cor-clara: #FFFFFF;
+            --cor-whatsapp: #25D366;
             --font-titulo: 'Cormorant Garamond', serif;
             --font-texto: 'Poppins', sans-serif;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
             font-family: var(--font-texto);
             background-color: var(--cor-fundo);
@@ -37,34 +38,25 @@
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
-        /* ALTERADO: TÍTULOS DE SEÇÃO COM SUBLINHADO */
         .section-title {
-            text-align: center;
-            font-family: var(--font-titulo);
-            font-size: 3rem;
-            color: var(--cor-principal);
-            margin-bottom: 60px;
-            position: relative;
-            display: inline-block;
-            padding-bottom: 15px;
+            text-align: center; font-family: var(--font-titulo); font-size: 3rem;
+            color: var(--cor-principal); margin-bottom: 60px; position: relative;
+            display: inline-block; padding-bottom: 15px;
         }
         .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--cor-verde-logo);
-            border-radius: 2px;
+            content: ''; position: absolute; bottom: 0; left: 50%;
+            transform: translateX(-50%); width: 80px; height: 4px;
+            background-color: var(--cor-verde-logo); border-radius: 2px;
         }
         .text-center-wrapper { text-align: center; margin-bottom: 60px; }
 
-
-        /* === ANIMAÇÕES DE SCROLL === */
-        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+        .animate-on-scroll {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1; transform: translateY(0);
+        }
 
         /* === CABEÇALHO E NAVEGAÇÃO === */
         .header {
@@ -76,87 +68,82 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         .navbar { display: flex; justify-content: space-between; align-items: center; }
-        
         .logo-text {
-            font-family: var(--font-titulo);
-            font-size: 2rem;
-            font-weight: 600;
-            color: var(--cor-clara);
-            text-decoration: none;
-            mix-blend-mode: difference;
+            font-family: var(--font-titulo); font-size: 2rem; font-weight: 600;
+            color: var(--cor-clara); text-decoration: none; mix-blend-mode: difference;
         }
-        .header.scrolled .logo-text {
-             mix-blend-mode: normal;
-        }
-
+        .header.scrolled .logo-text { mix-blend-mode: normal; }
         .nav-links { list-style: none; display: flex; gap: 30px; }
         .nav-links a {
             text-decoration: none; color: var(--cor-clara); font-weight: 600; font-size: 16px;
             position: relative; padding-bottom: 5px; mix-blend-mode: difference;
         }
-        .header.scrolled .nav-links a {
-            mix-blend-mode: normal;
-        }
+        .header.scrolled .nav-links a { mix-blend-mode: normal; }
         .nav-links a::after {
             content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
-            background-color: var(--cor-destaque);
-            transition: width 0.3s ease-out;
+            background-color: var(--cor-destaque); transition: width 0.3s ease-out;
         }
         .nav-links a:hover::after { width: 100%; }
 
         /* === MENU MOBILE === */
         .hamburger { display: none; font-size: 24px; cursor: pointer; color: var(--cor-clara); z-index: 1002; mix-blend-mode: difference;}
-        .header.scrolled .hamburger {
-            mix-blend-mode: normal;
-        }
+        .header.scrolled .hamburger { mix-blend-mode: normal; }
         .mobile-menu {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--cor-verde-logo);
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            opacity: 0; visibility: hidden;
-            transition: opacity 0.4s, visibility 0.4s;
-            z-index: 1001;
+            background-color: var(--cor-verde-logo); display: flex;
+            flex-direction: column; justify-content: center; align-items: center;
+            opacity: 0; visibility: hidden; transition: opacity 0.4s, visibility 0.4s; z-index: 1001;
         }
         .mobile-menu.active { opacity: 1; visibility: visible; }
-        .mobile-menu .nav-links { display: flex; flex-direction: column; gap: 40px; text-align: center; }
+        .mobile-menu .nav-links { flex-direction: column; gap: 40px; text-align: center; }
         .mobile-menu .nav-links a { color: var(--cor-clara); font-size: 2rem; mix-blend-mode: normal; }
         .close-menu { position: absolute; top: 30px; right: 30px; font-size: 2rem; color: var(--cor-clara); cursor: pointer; }
 
-        /* === SEÇÃO HERO (INICIAL) === */
+        /* === SEÇÕES === */
         .hero {
-            height: 100vh;
-            display: flex; align-items: center; justify-content: center; text-align: center;
+            height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center;
             background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('img/hero_ft.png');
-            background-size: cover; background-position: center; background-attachment: fixed;
-            color: var(--cor-clara);
+            background-size: cover; background-position: center; background-attachment: fixed; color: var(--cor-clara);
         }
         .hero-content { max-width: 800px; }
-        .hero h1 { font-family: var(--font-titulo); font-size: 5rem; font-weight: 600; line-height: 1.1; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); }
+        .hero h1 { font-family: var(--font-titulo); font-size: 5rem; line-height: 1.1; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); }
         .hero p { font-size: 1.2rem; margin-top: 15px; font-weight: 300; }
         .cta-button {
             display: inline-block; margin-top: 30px; padding: 15px 35px; background-color: var(--cor-destaque);
             color: var(--cor-clara); text-decoration: none; border-radius: 50px; font-weight: 700;
-            border: 2px solid var(--cor-destaque);
-            transition: all 0.3s;
+            border: 2px solid var(--cor-destaque); transition: all 0.3s;
         }
         .cta-button:hover { background-color: transparent; color: var(--cor-destaque); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
         
-        /* === SEÇÃO SOBRE === */
         #sobre { padding: 100px 0; }
         .sobre-content { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: center; }
         .sobre-img { width: 100%; height: 500px; object-fit: cover; border-radius: 15px; box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
         .sobre-texto h2 { font-size: 3rem; color: var(--cor-principal); margin-bottom: 20px; }
         .sobre-texto p { line-height: 1.8; margin-bottom: 15px; }
         .sobre-texto strong { color: var(--cor-verde-logo); }
+        
+        /* NOVA SEÇÃO DE SERVIÇOS */
+        #servicos { padding: 100px 0; background-color: #f7f3eb; }
+        .servicos-wrapper { display: flex; justify-content: center; align-items: flex-start; gap: 30px; flex-wrap: wrap; }
+        .servicos-wrapper img { max-width: 45%; height: auto; border-radius: 15px; box-shadow: 0 15px 30px rgba(0,0,0,0.1); object-fit: contain; }
 
-        /* === SEÇÃO PILARES (STACKING CARDS) === */
+        /* NOVA SEÇÃO TRINKS */
+        #trinks {
+            padding: 100px 0; background-color: var(--cor-verde-logo);
+            color: var(--cor-clara); text-align: center;
+        }
+        #trinks .section-title { color: var(--cor-clara); }
+        #trinks .section-title::after { background-color: var(--cor-clara); }
+        #trinks p { max-width: 600px; margin: -30px auto 40px; font-size: 1.1rem; line-height: 1.7; }
+        .trinks-button { padding: 18px 40px; background-color: var(--cor-destaque); font-size: 1.2rem; }
+        .trinks-button:hover { color: var(--cor-clara); border-color: var(--cor-clara); }
+
+        /* SEÇÃO PILARES (RESTAURADA) */
         #pilares { background-color: var(--cor-fundo); position: relative; padding-top: 100px; }
         .pilares-container { height: 300vh; position: relative; }
         .pilar-card {
-            height: 80vh; width: 80%; max-width: 900px;
-            position: sticky; top: 10vh;
-            margin: 0 auto 5vh;
-            border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            height: 80vh; width: 80%; max-width: 900px; position: sticky; top: 10vh;
+            margin: 0 auto 5vh; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
             display: flex; align-items: center; padding: 50px; color: var(--cor-clara);
             transform-origin: center top;
         }
@@ -167,7 +154,7 @@
         .pilar-content h3 { font-family: var(--font-titulo); font-size: 2.5rem; margin-bottom: 15px; }
         .pilar-content p { font-size: 1.1rem; line-height: 1.7; max-width: 500px; }
         
-        /* ALTERADO: SEÇÃO FILOSOFIA COM NOVA COR */
+        /* SEÇÃO FILOSOFIA (RESTAURADA) */
         #filosofia { background-color: var(--cor-verde-logo); padding: 100px 0; }
         #filosofia .section-title { color: var(--cor-clara); }
         #filosofia .section-title::after { background-color: var(--cor-clara); }
@@ -178,74 +165,64 @@
         .filosofia-text-item { margin-bottom: 80px; padding: 20px; border-left: 3px solid var(--cor-clara); color: var(--cor-clara); }
         .filosofia-text-item h3 { font-size: 1.8rem; margin-bottom: 10px; }
         .filosofia-text-item p { line-height: 1.8; opacity: 0.9; }
-        
-        /* NOVO: SEÇÃO GALERIA (MASONRY LAYOUT) */
+
         #galeria { padding: 100px 0; }
-        .gallery-container {
-            column-count: 4;
-            column-gap: 15px;
-        }
+        .gallery-container { column-count: 4; column-gap: 15px; }
         .gallery-item {
-            margin-bottom: 15px;
-            display: inline-block;
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-            border-radius: 15px;
-            cursor: pointer;
+            margin-bottom: 15px; display: inline-block; width: 100%;
+            position: relative; overflow: hidden; border-radius: 15px; cursor: pointer;
         }
-        .gallery-item img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 15px;
-            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
+        .gallery-item img { width: 100%; height: auto; display: block; border-radius: 15px; transition: transform 0.4s; }
+        .gallery-item:hover img { transform: scale(1.05); }
         .gallery-item .overlay {
-            position: absolute; bottom: 0; left: 0; right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); color: white;
-            padding: 40px 20px 20px; opacity: 0; transform: translateY(20px);
+            position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white; padding: 40px 20px 20px; opacity: 0; transform: translateY(20px);
             transition: opacity 0.4s, transform 0.4s;
         }
         .gallery-item:hover .overlay { opacity: 1; transform: translateY(0); }
         .overlay h3 { font-family: var(--font-titulo); font-size: 1.8rem; }
-
-
-        /* ALTERADO: SEÇÃO FAQ COM NOVA COR */
+        
         #faq { padding: 100px 0; background-color: #f7f3eb; }
         .faq-accordion { max-width: 800px; margin: 0 auto; }
         .faq-item { border-bottom: 1px solid #ddd; }
         .faq-question {
-            width: 100%; background: none; border: none; text-align: left;
-            padding: 25px 20px;
-            font-family: var(--font-texto); font-size: 1.2rem; font-weight: 600;
-            color: var(--cor-principal); cursor: pointer;
-            display: flex; justify-content: space-between; align-items: center;
-            transition: background-color 0.3s;
+            width: 100%; background: none; border: none; text-align: left; padding: 25px 20px;
+            font-family: var(--font-texto); font-size: 1.2rem; font-weight: 600; color: var(--cor-principal); cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center; transition: background-color 0.3s;
         }
         .faq-question:hover { background-color: #efe9dc; }
         .faq-question::after {
-            content: '\f067'; /* Font Awesome plus icon */
-            font-family: 'Font Awesome 6 Free'; font-weight: 900;
+            content: '\f067'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
             color: var(--cor-destaque); transition: transform 0.3s ease-out;
         }
-        .faq-question.active::after {
-             transform: rotate(135deg); /* Rotates plus to become a cross */
-        }
-        .faq-answer {
-            max-height: 0; overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0, 1, 0, 1), padding 0.5s;
-        }
+        .faq-question.active::after { transform: rotate(135deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s; }
         .faq-answer p { padding: 0 20px 25px; line-height: 1.7; }
-        .faq-item.active .faq-answer {
-            max-height: 300px; /* Adjust as needed */
-            transition: max-height 1s cubic-bezier(1, 0, 1, 0);
+        .faq-item.active .faq-answer { max-height: 300px; }
+        /* ESTILOS ATUALIZADOS PARA A SEÇÃO TRINKS */
+        #trinks .container > h2 { /* Estilo para o novo subtítulo H2 */
+            font-family: var(--font-texto);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--cor-clara);
+            margin-top: 10px;
+            margin-bottom: 25px;
         }
 
-        /* === SEÇÃO CONTATO === */
+        .trinks-logo { /* Estilo para a imagem do logo clicável */
+            display: block;
+            margin: 0 auto;
+            max-width: 280px; /* Tamanho maior para destaque */
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .trinks-logo:hover {
+            transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+        }
+        /* SEÇÃO CONTATO (ESTILO ORIGINAL RESTAURADO) */
         #contato { padding: 100px 0; background-color: var(--cor-fundo); }
         .contato-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: center; background: var(--cor-clara); border-radius: 15px; overflow:hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.1);}
         .contato-info { padding: 50px; }
@@ -254,12 +231,7 @@
         .info-item { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
         .info-item i { font-size: 1.5rem; color: var(--cor-destaque); }
         .info-item span, .info-item a { color: var(--cor-texto); text-decoration: none; }
-        
-        .contact-form-container {
-            padding: 50px;
-            background-image: url('img/contato.png');
-            background-size: cover; background-position: center;
-        }
+        .contact-form-container { padding: 50px; background-image: url('img/contato.png'); background-size: cover; background-position: center; }
         .contact-form { background: rgba(255,255,255,0.85); backdrop-filter: blur(10px); padding: 40px; border-radius: 15px; }
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 5px; font-weight: 600; color: var(--cor-texto)}
@@ -268,54 +240,36 @@
         .form-submit-btn { width: 100%; border: none; cursor: pointer; padding: 15px 35px; background-color: var(--cor-destaque); color: var(--cor-clara); text-decoration: none; border-radius: 50px; font-weight: 700; transition: all 0.3s; }
         .form-submit-btn:hover { background-color: var(--cor-principal); }
 
-        /* ALTERADO: RODAPÉ */
-        .footer {
-            background-color: var(--cor-verde-logo);
-            color: rgba(255, 255, 255, 0.8);
-            padding: 80px 0 20px;
+        /* RODAPÉ E BOTÕES FLUTUANTES */
+        .footer { background-color: var(--cor-verde-logo); color: rgba(255, 255, 255, 0.8); padding: 80px 0 20px; }
+        .footer-main { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; margin-bottom: 40px; align-items: center; }
+        .footer-social a { color: var(--cor-clara); font-size: 2.2rem; margin-left: 20px; transition: color 0.3s, transform 0.3s; display: inline-block; }
+        .footer-social a:hover { transform: translateY(-3px); }
+        .footer-social .fa-instagram {
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+            -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: #d6249f;
         }
-        .footer-main {
-            display: flex; justify-content: space-between; flex-wrap: wrap;
-            gap: 40px; margin-bottom: 40px; align-items: center;
-        }
-        .footer-about h2 {
-            font-family: var(--font-titulo); font-size: 2.5rem; font-weight: 600;
-            color: var(--cor-clara); margin-bottom: 10px;
-        }
-        .footer-about p { font-size: 1rem; max-width: 400px; }
-        
-        .footer-links-container {
-            display: flex; gap: 40px; align-items: center; flex-wrap: wrap;
-        }
-        .footer-links-container ul { list-style: none; display: flex; gap: 30px; flex-wrap: wrap; }
-        .footer-links-container a {
-            color: rgba(255, 255, 255, 0.8); text-decoration: none; transition: color 0.3s; font-weight: 600;
-        }
-        .footer-links-container a:hover { color: var(--cor-destaque); }
-        
-        .footer-social a {
-            color: var(--cor-clara); font-size: 1.8rem; margin-left: 20px;
-            transition: color 0.3s, transform 0.3s; display: inline-block;
-        }
-        .footer-social a:hover { color: var(--cor-destaque); transform: translateY(-3px); }
-        
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            padding-top: 20px; text-align: center; font-size: 0.9rem;
-        }
-        .footer-bottom p { margin: 0; }
+        .footer-social .fa-whatsapp { color: var(--cor-whatsapp); }
+        .footer-social .fa-whatsapp:hover { color: var(--cor-clara); }
+        .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.2); padding-top: 20px; text-align: center; font-size: 0.9rem; }
         .footer-bottom a { color: var(--cor-destaque); text-decoration: none; font-weight: 600; }
-
-        /* === BOTÕES FLUTUANTES === */
+        /* ESTILO PARA O LOGO DO TRINKS */
+        .trinks-logo {
+            display: block;
+            margin: 0 auto 25px auto; /* Centraliza o logo e adiciona espaço abaixo */
+            height: 45px; /* Define a altura do logo */
+            width: auto;
+        }
         .floating-buttons { position: fixed; bottom: 30px; right: 30px; z-index: 999; display: flex; flex-direction: column; gap: 15px; }
         .floating-btn {
-            width: 55px; height: 55px; border-radius: 50%; background-color: var(--cor-verde-logo); color: var(--cor-clara);
-            display: flex; justify-content: center; align-items: center; font-size: 1.8rem; text-decoration: none; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: transform 0.3s, opacity 0.3s, visibility 0.3s;
+            width: 55px; height: 55px; border-radius: 50%; color: var(--cor-clara);
+            display: flex; justify-content: center; align-items: center; font-size: 1.8rem;
+            text-decoration: none; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: transform 0.3s;
         }
         .floating-btn:hover { transform: scale(1.1); }
-        #back-to-top { opacity: 0; visibility: hidden; }
+        #back-to-top { background-color: var(--cor-principal); opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; }
         #back-to-top.visible { opacity: 1; visibility: visible; }
+        #whatsapp-float { background-color: var(--cor-whatsapp); font-size: 2.2rem; }
         
         /* === RESPONSIVIDADE === */
         @media (max-width: 992px) {
@@ -325,27 +279,19 @@
             .filosofia-image-container { height: 400px; margin-bottom: 40px; }
             .pilar-card { width: 90%; padding: 30px; }
             .gallery-container { column-count: 3; }
-            .footer-main { flex-direction: column; text-align: center; }
-            .footer-links-container { justify-content: center; width: 100%;}
-            .footer-social a { margin: 0 10px; }
         }
-
         @media (max-width: 768px) {
             .header { padding: 10px 0; }
             .header .navbar > .nav-links { display: none; }
             .hamburger { display: block; }
-            .hero { background-attachment: scroll; /* <-- FIX PARA IMAGEM NO MOBILE */ }
+            .hero { background-attachment: scroll; }
             .hero h1 { font-size: 3rem; }
-            .hero p { font-size: 1rem; }
-            #sobre, #pilares, #filosofia, #galeria, #contato, #faq { padding: 60px 0; }
+            #sobre, #servicos, #trinks, #pilares, #filosofia, #galeria, #faq, #contato { padding: 60px 0; }
             .section-title { font-size: 2.5rem; }
-            .sobre-texto h2, .contato-info h2 { font-size: 2.5rem; }
+            .servicos-wrapper img { max-width: 100%; }
             .gallery-container { column-count: 2; }
             .pilar-card { flex-direction: column; text-align: center; }
-            .pilar-content p { max-width: 100%; }
-            .contato-wrapper { gap: 0; }
             .contato-info, .contact-form-container { padding: 30px; }
-            .footer-links-container { flex-direction: column; gap: 30px; text-align: center; }
         }
     </style>
 </head>
@@ -353,13 +299,13 @@
 
     <header class="header">
         <nav class="navbar container">
-            <a href="#" class="logo-text">
-                Karajá Esmalteria
-            </a>
+            <a href="#" class="logo-text">Karajá Esmalteria</a>
             <ul class="nav-links">
                 <li><a href="#sobre">Quem Sou</a></li>
+                <li><a href="#servicos">Serviços</a></li>
                 <li><a href="#pilares">Pilares</a></li>
                 <li><a href="#galeria">Galeria</a></li>
+                <li><a href="#faq">Dúvidas</a></li>
                 <li><a href="#contato">Contato</a></li>
             </ul>
             <div class="hamburger"><i class="fas fa-bars"></i></div>
@@ -370,8 +316,10 @@
         <div class="close-menu"><i class="fas fa-times"></i></div>
         <ul class="nav-links">
             <li><a href="#sobre">Quem Sou</a></li>
+            <li><a href="#servicos">Serviços</a></li>
             <li><a href="#pilares">Pilares</a></li>
             <li><a href="#galeria">Galeria</a></li>
+            <li><a href="#faq">Dúvidas</a></li>
             <li><a href="#contato">Contato</a></li>
         </ul>
     </div>
@@ -379,77 +327,60 @@
     <main>
         <section class="hero" id="home">
             <div class="hero-content animate-on-scroll">
-                 <h1 data-value="Karajá Esmalteria" id="hero-title">Karajá Esmalteria</h1>
+                <h1 id="hero-title">Karajá Esmalteria</h1>
                 <p>Onde a força da ancestralidade encontra a beleza em cada detalhe. Transformando autoestima com arte.</p>
-                <a href="https://api.whatsapp.com/send?phone=5511996172589" target="_blank" class="cta-button">Agende seu Horário</a>
+                <a href="https://www.trinks.com/karajaesmalteria" target="_blank" class="cta-button">Agende seu Horário</a>
             </div>
         </section>
 
         <section id="sobre">
             <div class="container sobre-content">
-                <div class="animate-on-scroll">
-                    <img src="img/sobre.png" alt="Kamilla Karajá" class="sobre-img">
-                </div>
+                <div class="animate-on-scroll"><img src="img/sobre.png" alt="Kamilla Karajá" class="sobre-img"></div>
                 <div class="sobre-texto animate-on-scroll">
-                    <div class="text-center-wrapper" style="text-align: left; margin-bottom: 20px;">
-                        <h2 class="section-title" style="font-size: 3rem; margin-bottom: 0;">Raízes que florescem em beleza</h2>
-                    </div>
+                    <div class="text-center-wrapper" style="text-align: left; margin-bottom: 20px;"><h2 class="section-title" style="font-size: 3rem; margin-bottom: 0;">Raízes que florescem em beleza</h2></div>
                     <p>Prazer, meu nome é <strong>Kamilla Karajá</strong>. Com 26 anos, trago na alma e no sobrenome a força do meu povo, originário da aldeia Santa Isabel, em Mato Grosso. Minha paixão pela estética começou aos 12 anos e, hoje, em Mogi das Cruzes, essa jornada floresce na <strong>Karajá Esmalteria</strong>.</p>
                     <p>Acredito que a beleza é uma forma de expressão e poder. Minha missão é mais do que criar unhas perfeitas; é reacender o brilho no olhar e fortalecer a autoestima de cada cliente, unindo técnicas modernas com a riqueza da minha herança indígena.</p>
                 </div>
             </div>
         </section>
         
-        <section id="pilares">
-            <div class="text-center-wrapper animate-on-scroll">
-                <h2 class="section-title">Nossos Pilares</h2>
+        <section id="servicos">
+            <div class="container">
+                <div class="text-center-wrapper animate-on-scroll"><h2 class="section-title">Nossos Serviços</h2></div>
+                <div class="servicos-wrapper animate-on-scroll">
+                    <img src="img/Karaha.png" alt="Menu de Serviços de Alongamento">
+                    <img src="img/Kraha2.png" alt="Menu de Serviços Express e SPA dos Pés">
+                </div>
             </div>
+        </section>
+
+        <section id="trinks">
+            <div class="container animate-on-scroll">
+                <div class="text-center-wrapper"><h2 class="section-title">Agende seu Momento</h2></div>
+                <p>Estamos no Trinks para facilitar a sua vida! Escolha o melhor dia e horário para o seu procedimento de forma rápida, prática e totalmente online. Sua jornada de beleza está a um clique de distância.</p>
+                <h2>Agende seu Horário clicando no Trinks abaixo!</h2>
+                <a href="https://www.trinks.com/karajaesmalteria" target="_blank"><img src="img/logo_trinks.png" alt="Logo Trinks" class="trinks-logo"></a>
+            </div>
+        </section>
+
+        <section id="pilares">
+            <div class="text-center-wrapper animate-on-scroll"><h2 class="section-title">Nossos Pilares</h2></div>
             <div class="pilares-container">
-                <div class="pilar-card animate-on-scroll">
-                    <div class="pilar-content">
-                        <h3>Ancestralidade</h3>
-                        <p>Honramos nossas raízes em cada detalhe. A força e a arte do povo Karajá são a nossa maior inspiração, trazendo significado e identidade ao nosso trabalho.</p>
-                    </div>
-                </div>
-                <div class="pilar-card animate-on-scroll">
-                    <div class="pilar-content">
-                        <h3>Autoestima</h3>
-                        <p>Acreditamos no poder transformador da beleza. Nosso propósito é elevar a sua confiança, para que você se sinta forte, bela e orgulhosa de quem é.</p>
-                    </div>
-                </div>
-                <div class="pilar-card animate-on-scroll">
-                    <div class="pilar-content">
-                        <h3>Excelência</h3>
-                        <p>Utilizamos as melhores técnicas e produtos do mercado, como a fibra de vidro hiper-realista, para garantir um resultado impecável, duradouro e saudável para suas unhas.</p>
-                    </div>
-                </div>
+                <div class="pilar-card animate-on-scroll"><div class="pilar-content"><h3>Ancestralidade</h3><p>Honramos nossas raízes em cada detalhe. A força e a arte do povo Karajá são a nossa maior inspiração, trazendo significado e identidade ao nosso trabalho.</p></div></div>
+                <div class="pilar-card animate-on-scroll"><div class="pilar-content"><h3>Autoestima</h3><p>Acreditamos no poder transformador da beleza. Nosso propósito é elevar a sua confiança, para que você se sinta forte, bela e orgulhosa de quem é.</p></div></div>
+                <div class="pilar-card animate-on-scroll"><div class="pilar-content"><h3>Excelência</h3><p>Utilizamos as melhores técnicas e produtos do mercado, como a fibra de vidro hiper-realista, para garantir um resultado impecável, duradouro e saudável para suas unhas.</p></div></div>
             </div>
         </section>
         
         <section id="filosofia">
             <div class="container">
-                <div class="text-center-wrapper animate-on-scroll">
-                    <h2 class="section-title">Nossa Filosofia</h2>
-                </div>
+                <div class="text-center-wrapper animate-on-scroll"><h2 class="section-title">Nossa Filosofia</h2></div>
                 <div class="filosofia-wrapper">
-                    <div class="filosofia-sticky-col animate-on-scroll">
-                        <div class="filosofia-image-container">
-                             <img src="img/hero_ft1.png" alt="Inspiração Indígena">
-                        </div>
-                    </div>
+                    <div class="filosofia-sticky-col animate-on-scroll"><div class="filosofia-image-container"><img src="img/hero_ft1.png" alt="Inspiração Indígena"></div></div>
                     <div class="filosofia-scroll-col">
-                        <div class="filosofia-text-item animate-on-scroll">
-                            <h3>Arte Inspirada na Natureza</h3>
-                            <p>As cores da terra, os grafismos dos nossos ancestrais, a resistência das fibras naturais. Tudo ao nosso redor serve de inspiração para criar unhas que são verdadeiras obras de arte.</p>
-                        </div>
-                        <div class="filosofia-text-item animate-on-scroll">
-                            <h3>Técnica e Tradição</h3>
-                            <p>Unimos o conhecimento passado por gerações com as técnicas mais avançadas da estética. Cada unha é uma tela onde a tradição encontra a inovação para criar algo único e pessoal.</p>
-                        </div>
-                        <div class="filosofia-text-item animate-on-scroll">
-                            <h3>Beleza que Empodera</h3>
-                            <p>Mais que um serviço, oferecemos uma experiência de conexão e autocuidado. Queremos que você saia daqui não apenas com unhas lindas, mas com a alma renovada e a força de suas próprias raízes.</p>
-                        </div>
+                        <div class="filosofia-text-item animate-on-scroll"><h3>Arte Inspirada na Natureza</h3><p>As cores da terra, os grafismos dos nossos ancestrais, a resistência das fibras naturais. Tudo ao nosso redor serve de inspiração para criar unhas que são verdadeiras obras de arte.</p></div>
+                        <div class="filosofia-text-item animate-on-scroll"><h3>Técnica e Tradição</h3><p>Unimos o conhecimento passado por gerações com as técnicas mais avançadas da estética. Cada unha é uma tela onde a tradição encontra a inovação para criar algo único e pessoal.</p></div>
+                        <div class="filosofia-text-item animate-on-scroll"><h3>Beleza que Empodera</h3><p>Mais que um serviço, oferecemos uma experiência de conexão e autocuidado. Queremos que você saia daqui não apenas com unhas lindas, mas com a alma renovada e a força de suas próprias raízes.</p></div>
                     </div>
                 </div>
             </div>
@@ -457,84 +388,25 @@
 
         <section id="galeria">
             <div class="container">
-                <div class="text-center-wrapper animate-on-scroll">
-                    <h2 class="section-title">Inspire-se em Nosso Portfólio</h2>
-                </div>
+                <div class="text-center-wrapper animate-on-scroll"><h2 class="section-title">Inspire-se em Nosso Portfólio</h2></div>
                 <div class="gallery-container animate-on-scroll">
-                    <div class="gallery-item">
-                        <img src="img/cor_laranja.png" alt="Unhas com design sofisticado">
-                        <div class="overlay"><h3>Resistência e Leveza</h3></div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="img/sobre.png" alt="Arte em cada detalhe nas unhas">
-                        <div class="overlay"><h3>Arte em Cada Detalhe</h3></div>
-                    </div>
-                     <div class="gallery-item">
-                        <img src="img/cor_roxa.png" alt="Unhas com cores da natureza">
-                        <div class="overlay"><h3>Cores da Natureza</h3></div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="img/hero_ft1.png" alt="Unhas com beleza natural">
-                        <div class="overlay"><h3>Beleza Natural</h3></div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="img/hero_ft.png" alt="Design de unhas sofisticado">
-                        <div class="overlay"><h3>Design Sofisticado</h3></div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="img/cor_laranja.png" alt="Unhas com design sofisticado">
-                        <div class="overlay"><h3>Resistência e Leveza</h3></div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="img/cor_laranja.png" alt="Unhas com design sofisticado">
-                        <div class="overlay"><h3>Resistência e Leveza</h3></div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="img/cor_laranja.png" alt="Unhas com design sofisticado">
-                        <div class="overlay"><h3>Resistência e Leveza</h3></div>
-                    </div>
+                     <div class="gallery-item"><img src="img/cor_laranja.png" alt="Unhas com design sofisticado"><div class="overlay"><h3>Resistência e Leveza</h3></div></div>
+                    <div class="gallery-item"><img src="img/sobre.png" alt="Arte em cada detalhe nas unhas"><div class="overlay"><h3>Arte em Cada Detalhe</h3></div></div>
+                    <div class="gallery-item"><img src="img/cor_roxa.png" alt="Unhas com cores da natureza"><div class="overlay"><h3>Cores da Natureza</h3></div></div>
+                    <div class="gallery-item"><img src="img/hero_ft1.png" alt="Unhas com beleza natural"><div class="overlay"><h3>Beleza Natural</h3></div></div>
+                    <div class="gallery-item"><img src="img/hero_ft.png" alt="Design de unhas sofisticado"><div class="overlay"><h3>Design Sofisticado</h3></div></div>
                 </div>
             </div>
         </section>
         
         <section id="faq">
             <div class="container">
-                <div class="text-center-wrapper animate-on-scroll">
-                    <h2 class="section-title">Perguntas Frequentes</h2>
-                </div>
+                <div class="text-center-wrapper animate-on-scroll"><h2 class="section-title">Perguntas Frequentes</h2></div>
                 <div class="faq-accordion animate-on-scroll">
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            <span>O que é o alongamento em fibra de vidro?</span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>É uma técnica de alongamento que utiliza fios de fibra de vidro para criar uma base fina, leve e extremamente resistente sobre a unha natural. O resultado é um alongamento com aparência muito natural e de alta durabilidade.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            <span>O alongamento danifica as unhas naturais?</span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Não! Quando a aplicação e a manutenção são feitas por uma profissional qualificada e com produtos de qualidade, o alongamento protege a unha natural, permitindo que ela cresça forte e saudável por baixo.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            <span>Quanto tempo dura o alongamento?</span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>A durabilidade é um dos pontos fortes! Recomendo a manutenção a cada 15 a 21 dias para manter a estrutura e a beleza do alongamento, acompanhando o crescimento natural das suas unhas.</p>
-                        </div>
-                    </div>
-                     <div class="faq-item">
-                        <button class="faq-question">
-                            <span>Como devo cuidar das minhas unhas com alongamento?</span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Os cuidados são simples: evite usar as unhas como ferramentas, hidrate as cutículas diariamente com óleo específico e nunca tente remover o alongamento em casa. Seguindo as orientações, suas unhas ficarão perfeitas até a próxima manutenção.</p>
-                        </div>
-                    </div>
+                    <div class="faq-item"><button class="faq-question"><span>O que é o alongamento em fibra de vidro?</span></button><div class="faq-answer"><p>É uma técnica que utiliza fios de fibra de vidro para criar uma base fina, leve e resistente sobre a unha natural, com resultado de alta durabilidade e aparência natural.</p></div></div>
+                    <div class="faq-item"><button class="faq-question"><span>O alongamento danifica as unhas naturais?</span></button><div class="faq-answer"><p>Não! Quando feito por uma profissional qualificada, o alongamento protege a unha natural, permitindo que ela cresça forte e saudável por baixo.</p></div></div>
+                    <div class="faq-item"><button class="faq-question"><span>Quanto tempo dura o alongamento?</span></button><div class="faq-answer"><p>Recomendo a manutenção a cada 15 a 21 dias para manter a estrutura e a beleza do alongamento, acompanhando o crescimento natural das suas unhas.</p></div></div>
+                    <div class="faq-item"><button class="faq-question"><span>Como devo cuidar das minhas unhas com alongamento?</span></button><div class="faq-answer"><p>Evite usar as unhas como ferramentas, hidrate as cutículas diariamente com óleo específico e nunca tente remover o alongamento em casa. Assim suas unhas ficarão perfeitas até a próxima manutenção.</p></div></div>
                 </div>
             </div>
         </section>
@@ -542,37 +414,17 @@
         <section id="contato">
             <div class="container contato-wrapper animate-on-scroll">
                 <div class="contato-info">
-                     <div class="text-center-wrapper" style="text-align: left; margin-bottom: 20px;">
-                        <h2 class="section-title" style="font-size: 3rem; margin-bottom: 0;">Entre em Contato</h2>
-                    </div>
+                     <div class="text-center-wrapper" style="text-align: left; margin-bottom: 20px;"><h2 class="section-title" style="font-size: 3rem; margin-bottom: 0;">Entre em Contato</h2></div>
                     <p>Sua jornada de autoestima começa aqui. Estou pronta para transformar suas unhas em verdadeiras joias. Envie uma mensagem ou preencha o formulário ao lado!</p>
-                    <div class="info-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Atendimento em Mogi das Cruzes - SP</span>
-                    </div>
-                    <div class="info-item">
-                        <i class="fab fa-whatsapp"></i>
-                        <a href="https://api.whatsapp.com/send?phone=5511996172589" target="_blank">(11) 99617-2589</a>
-                    </div>
-                    <div class="info-item">
-                        <i class="fas fa-envelope"></i>
-                        <span>contato@karajaesmalteria.com.br</span>
-                    </div>
+                    <div class="info-item"><i class="fas fa-map-marker-alt"></i><span>Atendimento em Mogi das Cruzes - SP</span></div>
+                    <div class="info-item"><i class="fab fa-whatsapp"></i><a href="https://api.whatsapp.com/send?phone=5511996172589" target="_blank">(11) 99617-2589</a></div>
+                    <div class="info-item"><i class="fas fa-envelope"></i><span>contato@karajaesmalteria.com.br</span></div>
                 </div>
                 <div class="contact-form-container">
-                    <form action="#" method="POST" class="contact-form">
-                        <div class="form-group">
-                            <label for="name">Nome</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Mensagem</label>
-                            <textarea id="message" name="message" required></textarea>
-                        </div>
+                    <form class="contact-form">
+                        <div class="form-group"><label for="name">Nome</label><input type="text" id="name" name="name" required></div>
+                        <div class="form-group"><label for="email">Email</label><input type="email" id="email" name="email" required></div>
+                        <div class="form-group"><label for="message">Mensagem</label><textarea id="message" name="message" required></textarea></div>
                         <button type="submit" class="form-submit-btn">Enviar Mensagem</button>
                     </form>
                 </div>
@@ -581,34 +433,22 @@
     </main>
     
     <div class="floating-buttons">
-        <a href="#" class="floating-btn" id="back-to-top" aria-label="Voltar ao Topo">
-            <i class="fas fa-arrow-up"></i>
-        </a>
-        <a href="https://api.whatsapp.com/send?phone=5511996172589" target="_blank" class="floating-btn" id="whatsapp-float" aria-label="WhatsApp">
-            <i class="fab fa-whatsapp"></i>
-        </a>
+        <a href="#" class="floating-btn" id="back-to-top" aria-label="Voltar ao Topo"><i class="fas fa-arrow-up"></i></a>
+        <a href="https://api.whatsapp.com/send?phone=5511996172589" target="_blank" class="floating-btn" id="whatsapp-float" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
     </div>
 
     <footer class="footer">
         <div class="container">
             <div class="footer-main">
-                <div class="footer-about">
-                    <h2>Karajá Esmalteria</h2>
-                    <p>Conectando arte, ancestralidade e autoestima em cada detalhe. A força das suas raízes na ponta dos seus dedos.</p>
-                </div>
-                <div class="footer-links-container">
-                   
-                    <div class="footer-social">
-                        <a href="https://www.instagram.com/karajaesmalteria/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    </div>
+                <div class="footer-about"><h2>Karajá Esmalteria</h2></div>
+                <div class="footer-social">
+                    <a href="https://api.whatsapp.com/send?phone=5511996172589" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.instagram.com/karajaesmalteria/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Karajá Esmalteria. Todos os direitos reservados. | Desenvolvido por <a href="https://api.whatsapp.com/send?phone=5511960573657&text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20os%20seus%20serviços" target="_blank">Lucas Cabral</a></p>
-            </div>
+            <div class="footer-bottom"><p>&copy; 2025 Karajá Esmalteria. Todos os direitos reservados. | Desenvolvido por <a href="https://api.whatsapp.com/send?phone=5511960573657&text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20os%20seus%20serviços" target="_blank">Lucas Cabral</a></p></div>
         </div>
     </footer>
-
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -616,43 +456,33 @@
         let lastScrollTop = 0;
         
         window.addEventListener('scroll', () => {
-            // Efeito de aparecer/desaparecer header ao rolar
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             if (scrollTop > lastScrollTop && scrollTop > 90){
-                header.style.top = "-110px"; // Esconde o header
+                header.style.top = "-110px";
             } else {
-                header.style.top = "0"; // Mostra o header
+                header.style.top = "0";
             }
             lastScrollTop = scrollTop;
-
-            // Adiciona fundo ao header após rolar
-             header.classList.toggle('scrolled', window.scrollY > 50);
+            header.classList.toggle('scrolled', window.scrollY > 50);
         });
 
-        const hamburger = document.querySelector('.hamburger');
-        const closeMenuBtn = document.querySelector('.close-menu');
         const mobileMenu = document.querySelector('.mobile-menu');
-        const mobileLinks = document.querySelectorAll('.mobile-menu .nav-links a');
         const toggleMenu = () => mobileMenu.classList.toggle('active');
-        hamburger.addEventListener('click', toggleMenu);
-        closeMenuBtn.addEventListener('click', toggleMenu);
-        mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+        document.querySelector('.hamburger').addEventListener('click', toggleMenu);
+        document.querySelector('.close-menu').addEventListener('click', toggleMenu);
+        document.querySelectorAll('.mobile-menu .nav-links a').forEach(link => link.addEventListener('click', toggleMenu));
 
-        const scrollElements = document.querySelectorAll('.animate-on-scroll');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('is-visible');
             });
         }, { threshold: 0.1 });
-        scrollElements.forEach(el => observer.observe(el));
-
+        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+        
         const backToTopBtn = document.getElementById('back-to-top');
-        window.addEventListener('scroll', () => {
-            backToTopBtn.classList.toggle('visible', window.scrollY > 300);
-        });
-
+        window.addEventListener('scroll', () => backToTopBtn.classList.toggle('visible', window.scrollY > 300));
+        
+        // SCRIPT RESTAURADO: Cards sticky da seção Pilares
         const cards = document.querySelectorAll('.pilar-card');
         const container = document.querySelector('.pilares-container');
         if (container && window.innerWidth > 992) {
@@ -661,15 +491,12 @@
                 const containerHeight = container.offsetHeight;
                 const scrollPosition = window.scrollY;
                 const windowHeight = window.innerHeight;
-
                 const scrollProgress = Math.max(0, Math.min(1, (scrollPosition - containerTop) / (containerHeight - windowHeight)));
-
                 cards.forEach((card, i) => {
                     const totalCards = cards.length;
                     const scaleValue = 1 - ((totalCards - 1 - i) * 0.05);
                     const targetScale = 1 - ((totalCards - 2 - i) * 0.05);
                     const cardStartProgress = i / totalCards;
-                    
                     if (scrollProgress > cardStartProgress) {
                         card.style.transform = `scale(${targetScale})`;
                     } else {
@@ -679,8 +506,8 @@
             });
         }
         
-        const faqItems = document.querySelectorAll('.faq-item');
-        faqItems.forEach(item => {
+        // SCRIPT RESTAURADO: Accordion do FAQ
+        document.querySelectorAll('.faq-item').forEach(item => {
             const question = item.querySelector('.faq-question');
             question.addEventListener('click', () => {
                 const currentlyActive = document.querySelector('.faq-item.active');
@@ -688,41 +515,21 @@
                     currentlyActive.classList.remove('active');
                     currentlyActive.querySelector('.faq-question').classList.remove('active');
                 }
-
                 item.classList.toggle('active');
                 question.classList.toggle('active');
             });
         });
-
-        // NOVO: SCRIPT PARA ANIMAÇÃO DO TÍTULO DO HERO
-        const heroTitle = document.getElementById('hero-title');
-        const originalText = heroTitle.dataset.value;
-        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        let interval = null;
-        let iteration = 0;
-
-        const scrambleEffect = () => {
-            heroTitle.innerText = heroTitle.innerText
-                .split("")
-                .map((letter, index) => {
-                    if (index < iteration) {
-                        return originalText[index];
-                    }
-                    return letters[Math.floor(Math.random() * 26)];
-                })
-                .join("");
-
-            if (iteration >= originalText.length) {
-                clearInterval(interval);
-            }
-            iteration += 1 / 3;
-        };
         
-        // Inicia o efeito um pouco depois do carregamento da página
-        setTimeout(() => {
-            interval = setInterval(scrambleEffect, 30);
-        }, 500);
-
+        // SCRIPT FUNCIONAL: Formulário de Contato para WhatsApp
+        document.querySelector('.contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const clientMessage = document.getElementById('message').value;
+            const phoneNumber = '5511996172589';
+            const whatsappMessage = `Olá! Meu nome é ${name}. Gostaria de tirar uma dúvida. \n\nMensagem: ${clientMessage}`;
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(whatsappMessage)}`;
+            window.open(whatsappUrl, '_blank');
+        });
     });
     </script>
 </body>
