@@ -96,9 +96,21 @@
             flex-direction: column; justify-content: center; align-items: center;
             opacity: 0; visibility: hidden; transition: opacity 0.4s, visibility 0.4s; z-index: 1001;
         }
-        .mobile-menu.active { opacity: 1; visibility: visible; }
+        .mobile-menu.active { 
+            opacity: 1; 
+            visibility: visible; 
+        }
         .mobile-menu .nav-links { flex-direction: column; gap: 40px; text-align: center; }
-        .mobile-menu .nav-links a { color: var(--cor-clara); font-size: 2rem; mix-blend-mode: normal; }
+        .mobile-menu .nav-links li {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .mobile-menu.active .nav-links li {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .mobile-menu .nav-links a { color: var(--cor-clara); font-size: 2rem; mix-blend-mode: normal; font-weight: 400; }
         .close-menu { position: absolute; top: 30px; right: 30px; font-size: 2rem; color: var(--cor-clara); cursor: pointer; }
 
         /* === SEÇÕES === */
@@ -396,8 +408,11 @@
             flex: 0 0 100%; scroll-snap-align: center;
         }
         .carousel-slide img {
-            width: 100%; height: 500px; object-fit: cover;
+            width: 100%;
+            height: auto; /* Alterado de 500px para auto */
+            object-fit: contain; /* Alterado de cover para contain */
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            display: block; /* Garante que a imagem se comporte como bloco */
         }
         .carousel-thumbs-container {
             display: flex; gap: 10px; margin-top: 15px;
@@ -413,7 +428,8 @@
         .thumb-item.active { border-color: var(--cor-principal); opacity: 1; }
         .thumb-item img { width: 100%; height: 100%; object-fit: cover; }
         .carousel-button {
-            position: absolute; top: 40%; transform: translateY(-50%);
+            position: absolute; top: 50%; /* Centralizado verticalmente */
+            transform: translateY(-50%);
             background-color: rgba(255, 255, 255, 0.5); backdrop-filter: blur(4px);
             border: 1px solid rgba(255, 255, 255, 0.7); border-radius: 50%;
             width: 45px; height: 45px; font-size: 1.2rem; color: var(--cor-principal);
@@ -443,7 +459,7 @@
             .hamburger { display: block; }
             .hero, #agendamento-final { background-attachment: scroll; } /* Efeito parallax desativado no mobile para performance */
             .hero h1 { font-size: 3rem; }
-            #sobre, #servicos, #trinks, #pilares, #filosofia, #galeria, #faq, #contato, #agendamento-final, #cabelos { padding: 80px 0; }
+            #sobre, #servicos, #trinks, #pilares, #filosofia, #galeria, #faq, #contato, #agendamento-final, #cabelos, #revista { padding: 80px 0; }
             .section-title { font-size: 2.5rem; }
             .servicos-wrapper img { max-width: 100%; }
             .gallery-container { column-count: 2; }
@@ -728,10 +744,16 @@
         });
 
         const mobileMenu = document.querySelector('.mobile-menu');
-        const toggleMenu = () => mobileMenu.classList.toggle('active');
-        document.querySelector('.hamburger').addEventListener('click', toggleMenu);
-        document.querySelector('.close-menu').addEventListener('click', toggleMenu);
-        document.querySelectorAll('.mobile-menu .nav-links a').forEach(link => link.addEventListener('click', toggleMenu));
+        const hamburger = document.querySelector('.hamburger');
+        const closeMenuBtn = document.querySelector('.close-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-menu .nav-links a');
+
+        const toggleMenu = () => {
+            mobileMenu.classList.toggle('active');
+        };
+        hamburger.addEventListener('click', toggleMenu);
+        closeMenuBtn.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -809,18 +831,15 @@
             lightbox.classList.remove('visible');
         };
 
-        // Fecha ao clicar no botão 'X'
         closeBtn.addEventListener('click', closeLightbox);
 
-        // Fecha ao clicar fora da imagem
         lightbox.addEventListener('click', (e) => {
             if (e.target === lightbox) {
                 closeLightbox();
             }
         });
         
-    });
-      // === LÓGICA DO CAROUSEL COM THUMBNAILS DA REVISTA ===
+        // === LÓGICA DO CAROUSEL COM THUMBNAILS DA REVISTA ===
         const mainCarousel = document.querySelector('.carousel-main-container');
         if (mainCarousel) {
             const slides = document.querySelectorAll('.carousel-slide');
@@ -829,12 +848,12 @@
             const nextButton = document.querySelector('.carousel-button.next');
             let activeIndex = 0;
 
-            const updateActiveThumb = (index) => {
+            const updateActiveThumb = (index, scrollIntoView = false) => {
                 thumbs.forEach(thumb => thumb.classList.remove('active'));
                 const newActiveThumb = thumbs[index];
                 if (newActiveThumb) {
                     newActiveThumb.classList.add('active');
-                    newActiveThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    if (scrollIntoView) newActiveThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
                 }
             };
 
@@ -845,7 +864,7 @@
                         behavior: 'smooth'
                     });
                     activeIndex = index;
-                    updateActiveThumb(index);
+                    updateActiveThumb(index, true); // Scroll only on user interaction
                 }
             };
 
@@ -874,8 +893,8 @@
                         const slideElement = entry.target;
                         const index = Array.from(slides).indexOf(slideElement);
                         if(index > -1){
-                           activeIndex = index;
-                           updateActiveThumb(index);
+                            activeIndex = index;
+                            updateActiveThumb(index);
                         }
                     }
                 });
@@ -883,9 +902,7 @@
 
             slides.forEach(slide => slideObserver.observe(slide));
         }
-    
-
-    
+    });
     </script>
 </body>
 </html>
