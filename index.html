@@ -381,12 +381,12 @@
             to {transform: scale(1); opacity: 1;}
         }
         .lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
+            position: absolute; /* Mantido */
+            top: 15px; /* Ajustado */
+            right: 35px; /* Mantido */
+            color: #f1f1f1; /* Mantido */
+            font-size: 3rem; /* Ajustado */
+            font-weight: 300; /* Alterado para mais fino */
             transition: 0.3s;
             cursor: pointer;
         }
@@ -412,6 +412,7 @@
             height: auto; /* Alterado de 500px para auto */
             object-fit: contain; /* Alterado de cover para contain */
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            cursor: pointer; /* Adicionado para indicar que é clicável */
             display: block; /* Garante que a imagem se comporte como bloco */
         }
         .carousel-thumbs-container {
@@ -551,7 +552,7 @@
                         <p>Produtos premium, ambiente acolhedor e profissionais prontos para realçar sua beleza natural.</p>
                     </div>
                     <div class="cabelos-img-container animate-on-scroll">
-                        <img src="img/cabelos1.png" alt="Mulher com cabelo bem cuidado" class="cabelos-img">
+                        <img src="img/cabelo_ft.png" alt="Mulher com cabelo bem cuidado" class="cabelos-img">
                     </div>
                 </div>
             </div>
@@ -584,7 +585,7 @@
             <div class="filosofia-wrapper">
                 <div class="filosofia-sticky-col animate-on-scroll">
                     <div class="filosofia-image-container">
-                        <img src="img/ambiente3.png" alt="Ambiente Aconchegante da Esmalteria">
+                        <img src="img/ambiente1.png" alt="Ambiente Aconchegante da Esmalteria">
                     </div>
                 </div>
                 <div class="filosofia-scroll-col">
@@ -837,6 +838,17 @@
             if (e.target === lightbox) {
                 closeLightbox();
             }
+        });
+
+        // === LÓGICA PARA ABRIR LIGHTBOX NO CAROUSEL DA REVISTA ===
+        const carouselImages = document.querySelectorAll('.carousel-slide img');
+        carouselImages.forEach(img => {
+            img.addEventListener('click', () => {
+                if (img) {
+                    lightbox.classList.add('visible');
+                    lightboxImg.src = img.src;
+                }
+            });
         });
         
         // === LÓGICA DO CAROUSEL COM THUMBNAILS DA REVISTA ===
