@@ -147,6 +147,59 @@
             padding: 10px; transition: transform 0.3s ease;
         }
         .trinks-logo:hover { transform: scale(1.05); }
+        
+        #cabelos { 
+            padding: 100px 0; 
+            background-color: var(--cor-fundo); 
+        }
+        .cabelos-content { 
+            display: grid; 
+            grid-template-columns: 1.2fr 1fr; 
+            gap: 60px; 
+            align-items: center; 
+        }
+        .cabelos-img { 
+            width: 100%; 
+            height: 500px; 
+            object-fit: cover; 
+            border-radius: 15px; 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1); 
+        }
+        .cabelos-texto h3 { 
+            font-family: var(--font-titulo); 
+            font-size: 2.5rem; 
+            color: var(--cor-principal); 
+            margin-bottom: 20px; 
+        }
+        .cabelos-texto p { 
+            line-height: 1.8; 
+            margin-bottom: 15px; 
+        }
+        .cabelos-texto strong { 
+            color: var(--cor-verde-logo); 
+        }
+        .cabelos-texto h4 {
+            font-size: 1.3rem;
+            color: var(--cor-principal);
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .cabelos-texto ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 20px;
+        }
+        .cabelos-texto ul li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+        }
+        .cabelos-texto ul li i {
+            color: var(--cor-destaque);
+        }
 
         #pilares { background-color: var(--cor-fundo); position: relative; padding-top: 100px; }
         .pilares-container { height: 300vh; position: relative; }
@@ -185,7 +238,7 @@
         .gallery-item .overlay {
             position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
             color: white; padding: 40px 20px 20px; opacity: 0; transform: translateY(20px);
-            transition: opacity 0.4s, transform 0.4s;
+            transition: opacity 0.4s, transform 0.4s; pointer-events: none; /* Adicionado para não interferir no clique */
         }
         .gallery-item:hover .overlay { opacity: 1; transform: translateY(0); }
         .overlay h3 { font-family: var(--font-titulo); font-size: 1.8rem; }
@@ -229,9 +282,9 @@
         #agendamento-final {
             padding: 80px 0;
             background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('img/ambiente3.png');
-            background-size: cover; /* Adicionado para cobrir a área */
-            background-position: center; /* Adicionado para centralizar a imagem */
-            background-attachment: fixed; /* Adicionado para efeito parallax */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             text-align: center;
             color: var(--cor-clara);
         }
@@ -282,10 +335,103 @@
         #back-to-top.visible { opacity: 1; visibility: visible; }
         #whatsapp-float { background-color: var(--cor-whatsapp); font-size: 2.2rem; }
         
+        /* === LIGHTBOX (MODAL DA GALERIA) === */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.85);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .lightbox.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .lightbox-content {
+            display: block;
+            max-width: 90%;
+            max-height: 85vh;
+            animation-name: zoom;
+            animation-duration: 0.4s;
+        }
+        @keyframes zoom {
+            from {transform: scale(0.5); opacity: 0;}
+            to {transform: scale(1); opacity: 1;}
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .lightbox-close:hover,
+        .lightbox-close:focus {
+            color: #bbb;
+            text-decoration: none;
+        }
+        /* === SEÇÃO REVISTA CAROUSEL COM THUMBNAILS === */
+        #revista { padding: 100px 0; background-color: var(--cor-fundo-alternativo); overflow: hidden;}
+        .carousel-wrapper { max-width: 900px; margin: 0 auto; position: relative; }
+        .carousel-main-container {
+            display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+            scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; border-radius: 15px;
+        }
+        .carousel-main-container::-webkit-scrollbar { display: none; }
+        .carousel-slide {
+            flex: 0 0 100%; scroll-snap-align: center;
+        }
+        .carousel-slide img {
+            width: 100%; height: 500px; object-fit: cover;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .carousel-thumbs-container {
+            display: flex; gap: 10px; margin-top: 15px;
+            padding-bottom: 10px; overflow-x: auto; scrollbar-width: none;
+        }
+        .carousel-thumbs-container::-webkit-scrollbar { display: none; }
+        .thumb-item {
+            flex: 0 0 120px; height: 80px; cursor: pointer;
+            border-radius: 8px; overflow: hidden;
+            border: 3px solid transparent; transition: border-color 0.3s, opacity 0.3s;
+            opacity: 0.6;
+        }
+        .thumb-item.active { border-color: var(--cor-principal); opacity: 1; }
+        .thumb-item img { width: 100%; height: 100%; object-fit: cover; }
+        .carousel-button {
+            position: absolute; top: 40%; transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.5); backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.7); border-radius: 50%;
+            width: 45px; height: 45px; font-size: 1.2rem; color: var(--cor-principal);
+            cursor: pointer; z-index: 10; display: none;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .carousel-button:hover { background-color: var(--cor-principal); color: var(--cor-clara); }
+        .carousel-button.prev { left: 15px; }
+        .carousel-button.next { right: 15px; }
+
+         @media (min-width: 769px) {
+            .carousel-button { display: flex; align-items: center; justify-content: center; }
+        }
         /* === RESPONSIVIDADE === */
         @media (max-width: 992px) {
-            .sobre-content, .filosofia-wrapper, .contato-wrapper { grid-template-columns: 1fr; }
+            .sobre-content, .filosofia-wrapper, .contato-wrapper, .cabelos-content { grid-template-columns: 1fr; }
             .sobre-img { order: -1; height: 400px; }
+            .cabelos-img { height: 400px; }
             .filosofia-sticky-col { position: static; }
             .filosofia-image-container { height: 400px; margin-bottom: 40px; }
             .pilar-card { width: 90%; padding: 30px; }
@@ -297,15 +443,15 @@
             .hamburger { display: block; }
             .hero, #agendamento-final { background-attachment: scroll; } /* Efeito parallax desativado no mobile para performance */
             .hero h1 { font-size: 3rem; }
-            #sobre, #servicos, #trinks, #pilares, #filosofia, #galeria, #faq, #contato, #agendamento-final { padding: 80px 0; }
+            #sobre, #servicos, #trinks, #pilares, #filosofia, #galeria, #faq, #contato, #agendamento-final, #cabelos { padding: 80px 0; }
             .section-title { font-size: 2.5rem; }
             .servicos-wrapper img { max-width: 100%; }
             .gallery-container { column-count: 2; }
             .pilar-card { flex-direction: column; text-align: center; }
             .pilar-content h3 { font-size: 2rem; }
             .contato-info, .contact-form-container { padding: 30px; }
-            .footer-main { justify-content: center; text-align: center; } /* Centraliza conteúdo do rodapé */
-            .footer-social a { margin: 0 10px; } /* Ajusta margem dos ícones sociais */
+            .footer-main { justify-content: center; text-align: center; }
+            .footer-social a { margin: 0 10px; }
         }
     </style>
 </head>
@@ -317,6 +463,7 @@
             <ul class="nav-links">
                 <li><a href="#sobre">Quem Sou</a></li>
                 <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#cabelos">Cabelos</a></li>
                 <li><a href="#pilares">Pilares</a></li>
                 <li><a href="#galeria">Galeria</a></li>
                 <li><a href="#faq">Dúvidas</a></li>
@@ -331,6 +478,7 @@
         <ul class="nav-links">
             <li><a href="#sobre">Quem Sou</a></li>
             <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#cabelos">Cabelos</a></li>
             <li><a href="#pilares">Pilares</a></li>
             <li><a href="#galeria">Galeria</a></li>
             <li><a href="#faq">Dúvidas</a></li>
@@ -360,10 +508,35 @@
         
         <section id="servicos">
             <div class="container">
-                <div class="text-center-wrapper animate-on-scroll"><h2 class="section-title">Nossos Serviços</h2></div>
+                <div class="text-center-wrapper animate-on-scroll"><h2 class="section-title">Nossos Serviços de Unhas</h2></div>
                 <div class="servicos-wrapper animate-on-scroll">
                     <img src="img/Karaha.png" alt="Menu de Serviços de Alongamento">
                     <img src="img/Kraha2.png" alt="Menu de Serviços Express e SPA dos Pés">
+                </div>
+            </div>
+        </section>
+
+        <section id="cabelos">
+            <div class="container">
+                <div class="text-center-wrapper animate-on-scroll">
+                    <h2 class="section-title">Cuidado Capilar de Excelência</h2>
+                </div>
+                <div class="cabelos-content">
+                    <div class="cabelos-texto animate-on-scroll">
+                        <h3>Cuidamos dos seus cabelos com excelência!</h3>
+                        <p>No nosso espaço, oferecemos escova, hidratação e tintura com todo o cuidado que seu cabelo merece. Utilizamos produtos <strong>L’ANZA</strong>, referência mundial em tratamento capilar, garantindo resultados visíveis desde a primeira aplicação.</p>
+                        <p>Quer dar mais brilho, movimento ou renovar o visual com uma nova cor? Você está no lugar certo!</p>
+                        <h4>O que oferecemos:</h4>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Escova com acabamento profissional</li>
+                            <li><i class="fas fa-check"></i> Hidratações profundas para todos os tipos de cabelo</li>
+                            <li><i class="fas fa-check"></i> Colorações e tinturas com pigmentos de alta qualidade</li>
+                        </ul>
+                        <p>Produtos premium, ambiente acolhedor e profissionais prontos para realçar sua beleza natural.</p>
+                    </div>
+                    <div class="cabelos-img-container animate-on-scroll">
+                        <img src="img/cabelos1.png" alt="Mulher com cabelo bem cuidado" class="cabelos-img">
+                    </div>
                 </div>
             </div>
         </section>
@@ -395,7 +568,7 @@
             <div class="filosofia-wrapper">
                 <div class="filosofia-sticky-col animate-on-scroll">
                     <div class="filosofia-image-container">
-                        <img src="img/foto_hero.png" alt="Ambiente Aconchegante da Esmalteria">
+                        <img src="img/ambiente3.png" alt="Ambiente Aconchegante da Esmalteria">
                     </div>
                 </div>
                 <div class="filosofia-scroll-col">
@@ -423,14 +596,49 @@
                 <div class="gallery-container animate-on-scroll">
                     <div class="gallery-item"><img src="img/unha1.png" alt="Unhas com design sofisticado"><div class="overlay"></div></div>
                     <div class="gallery-item"><img src="img/unha2.png" alt="Arte em cada detalhe nas unhas"><div class="overlay"></div></div>
+                    <div class="gallery-item"><img src="img/cabelos2.png" alt="Cabelo com mechas"><div class="overlay"></div></div>
                     <div class="gallery-item"><img src="img/unha3.png" alt="Unhas com cores da natureza"><div class="overlay"></div></div>
                     <div class="gallery-item"><img src="img/unha4.png" alt="Unhas com beleza natural"><div class="overlay"></div></div>
+                    <div class="gallery-item"><img src="img/cabelos3.png" alt="Cabelo com corte moderno"><div class="overlay"></div></div>
                     <div class="gallery-item"><img src="img/unha5.png" alt="Design de unhas sofisticado"><div class="overlay"></div></div>
                     <div class="gallery-item"><img src="img/unha6.png" alt="Unhas com design sofisticado"><div class="overlay"></div></div>
+                    <div class="gallery-item"><img src="img/cabelos4.png" alt="Cabelo loiro tratado"><div class="overlay"></div></div>
                     <div class="gallery-item"><img src="img/unha7.png" alt="Arte em cada detalhe nas unhas"><div class="overlay"></div></div>
                     <div class="gallery-item"><img src="img/unha8.png" alt="Unhas com cores da natureza"><div class="overlay"></div></div>
+                    <div class="gallery-item"><img src="img/cabelos5.png" alt="Penteado para evento"><div class="overlay"></div></div>
                     <div class="gallery-item"><img src="img/unha9.png" alt="Unhas com beleza natural"><div class="overlay"></div></div>
                     <div class="gallery-item"><img src="img/unha10.png" alt="Design de unhas sofisticado"><div class="overlay"></div></div>
+                    <div class="gallery-item"><img src="img/cabelos6.png" alt="Cabelo cacheado definido"><div class="overlay"></div></div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="revista">
+            <div class="container">
+                <div class="text-center-wrapper animate-on-scroll">
+                    <h2 class="section-title">Nossa Revista</h2>
+                </div>
+                <div class="carousel-wrapper animate-on-scroll">
+                    <div class="carousel-main-container">
+                        <div class="carousel-slide"><img src="img/cabelo_revista.png" alt="Página da revista 1"></div>
+                        <div class="carousel-slide"><img src="img/cabelo_revista2.png" alt="Página da revista 2"></div>
+                        <div class="carousel-slide"><img src="img/cabelo_revista3.png" alt="Página da revista 3"></div>
+                        <div class="carousel-slide"><img src="img/cabelo_revista4.png" alt="Página da revista 4"></div>
+                        <div class="carousel-slide"><img src="img/cabelo_revista5.png" alt="Página da revista 5"></div>
+                        <div class="carousel-slide"><img src="img/cabelo_revista6.png" alt="Página da revista 6"></div>
+                    </div>
+                    
+                    <button class="carousel-button prev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-button next"><i class="fas fa-chevron-right"></i></button>
+
+                    <div class="carousel-thumbs-container">
+                        <div class="thumb-item active" data-index="0"><img src="img/cabelo_revista.png" alt="Miniatura 1"></div>
+                        <div class="thumb-item" data-index="1"><img src="img/cabelo_revista2.png" alt="Miniatura 2"></div>
+                        <div class="thumb-item" data-index="2"><img src="img/cabelo_revista3.png" alt="Miniatura 3"></div>
+                        <div class="thumb-item" data-index="3"><img src="img/cabelo_revista4.png" alt="Miniatura 4"></div>
+                        <div class="thumb-item" data-index="4"><img src="img/cabelo_revista5.png" alt="Miniatura 5"></div>
+                        <div class="thumb-item" data-index="5"><img src="img/cabelo_revista6.png" alt="Miniatura 6"></div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -496,6 +704,12 @@
             <div class="footer-bottom"><p>&copy; 2025 Karajá Esmalteria. Todos os direitos reservados. | Desenvolvido por <a href="https://api.whatsapp.com/send?phone=5511960573657&text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20os%20seus%20serviços" target="_blank">Lucas Cabral</a></p></div>
         </div>
     </footer>
+
+    <div id="lightbox-modal" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -574,7 +788,104 @@
             const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(whatsappMessage)}`;
             window.open(whatsappUrl, '_blank');
         });
+
+        // === LÓGICA DO LIGHTBOX DA GALERIA ===
+        const lightbox = document.getElementById('lightbox-modal');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const closeBtn = document.querySelector('.lightbox-close');
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const imgElement = item.querySelector('img');
+                if (imgElement) {
+                    lightbox.classList.add('visible');
+                    lightboxImg.src = imgElement.src;
+                }
+            });
+        });
+
+        const closeLightbox = () => {
+            lightbox.classList.remove('visible');
+        };
+
+        // Fecha ao clicar no botão 'X'
+        closeBtn.addEventListener('click', closeLightbox);
+
+        // Fecha ao clicar fora da imagem
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+        
     });
+      // === LÓGICA DO CAROUSEL COM THUMBNAILS DA REVISTA ===
+        const mainCarousel = document.querySelector('.carousel-main-container');
+        if (mainCarousel) {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const thumbs = document.querySelectorAll('.thumb-item');
+            const prevButton = document.querySelector('.carousel-button.prev');
+            const nextButton = document.querySelector('.carousel-button.next');
+            let activeIndex = 0;
+
+            const updateActiveThumb = (index) => {
+                thumbs.forEach(thumb => thumb.classList.remove('active'));
+                const newActiveThumb = thumbs[index];
+                if (newActiveThumb) {
+                    newActiveThumb.classList.add('active');
+                    newActiveThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
+            };
+
+            const goToSlide = (index) => {
+                if (slides[index]) {
+                    mainCarousel.scrollTo({
+                        left: slides[index].offsetLeft - mainCarousel.offsetLeft,
+                        behavior: 'smooth'
+                    });
+                    activeIndex = index;
+                    updateActiveThumb(index);
+                }
+            };
+
+            thumbs.forEach(thumb => {
+                thumb.addEventListener('click', () => {
+                    const index = parseInt(thumb.dataset.index, 10);
+                    goToSlide(index);
+                });
+            });
+
+            prevButton.addEventListener('click', () => {
+                let newIndex = activeIndex - 1;
+                if (newIndex < 0) newIndex = slides.length - 1; // Loop
+                goToSlide(newIndex);
+            });
+
+            nextButton.addEventListener('click', () => {
+                let newIndex = activeIndex + 1;
+                if (newIndex >= slides.length) newIndex = 0; // Loop
+                goToSlide(newIndex);
+            });
+
+            const slideObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const slideElement = entry.target;
+                        const index = Array.from(slides).indexOf(slideElement);
+                        if(index > -1){
+                           activeIndex = index;
+                           updateActiveThumb(index);
+                        }
+                    }
+                });
+            }, { root: mainCarousel, threshold: 0.5 });
+
+            slides.forEach(slide => slideObserver.observe(slide));
+        }
+    
+
+    
     </script>
 </body>
 </html>
