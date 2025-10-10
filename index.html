@@ -137,13 +137,11 @@
         .sobre-texto strong { color: var(--cor-verde-logo); }
         
         #servicos { padding: 100px 0; background-color: var(--cor-fundo-alternativo); }
-        .servicos-wrapper {
-            display: flex; justify-content: center; align-items: flex-start;
-            gap: 30px; flex-wrap: wrap;
-        }
-        .servicos-wrapper img {
-            max-width: 45%; height: auto; border-radius: 15px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1); object-fit: contain;
+        .servicos-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: flex-start;
         }
 
         #trinks {
@@ -168,7 +166,7 @@
             display: grid; 
             grid-template-columns: 1.2fr 1fr; 
             gap: 60px; 
-            align-items: center; 
+            align-items: flex-start; 
         }
         .cabelos-img { 
             width: 100%; 
@@ -250,7 +248,7 @@
         .gallery-item .overlay {
             position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
             color: white; padding: 40px 20px 20px; opacity: 0; transform: translateY(20px);
-            transition: opacity 0.4s, transform 0.4s; pointer-events: none; /* Adicionado para não interferir no clique */
+            transition: opacity 0.4s, transform 0.4s; pointer-events: none;
         }
         .gallery-item:hover .overlay { opacity: 1; transform: translateY(0); }
         .overlay h3 { font-family: var(--font-titulo); font-size: 1.8rem; }
@@ -290,7 +288,25 @@
         .form-submit-btn { width: 100%; border: none; cursor: pointer; padding: 15px 35px; background-color: var(--cor-destaque); color: var(--cor-clara); text-decoration: none; border-radius: 50px; font-weight: 700; transition: all 0.3s; }
         .form-submit-btn:hover { background-color: var(--cor-principal); }
 
-        /* === SEÇÃO DE AGENDAMENTO FINAL === */
+        #localizacao { 
+            padding: 100px 0; 
+        }
+        .map-container {
+            position: relative;
+            overflow: hidden;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
         #agendamento-final {
             padding: 80px 0;
             background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('img/ambiente3.png');
@@ -322,7 +338,6 @@
             color: var(--cor-whatsapp);
         }
 
-        /* === RODAPÉ E BOTÕES FLUTUANTES === */
         .footer { background-color: #1F2C23; color: rgba(255, 255, 255, 0.8); padding: 80px 0 20px; }
         .footer-main { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; margin-bottom: 40px; align-items: center; }
         .footer-social a { color: var(--cor-clara); font-size: 2.2rem; margin-left: 20px; transition: color 0.3s, transform 0.3s; display: inline-block; }
@@ -347,7 +362,6 @@
         #back-to-top.visible { opacity: 1; visibility: visible; }
         #whatsapp-float { background-color: var(--cor-whatsapp); font-size: 2.2rem; }
         
-        /* === LIGHTBOX (MODAL DA GALERIA) === */
         .lightbox {
             display: none;
             position: fixed;
@@ -381,12 +395,12 @@
             to {transform: scale(1); opacity: 1;}
         }
         .lightbox-close {
-            position: absolute; /* Mantido */
-            top: 15px; /* Ajustado */
-            right: 35px; /* Mantido */
-            color: #f1f1f1; /* Mantido */
-            font-size: 3rem; /* Ajustado */
-            font-weight: 300; /* Alterado para mais fino */
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 3rem;
+            font-weight: 300;
             transition: 0.3s;
             cursor: pointer;
         }
@@ -395,7 +409,7 @@
             color: #bbb;
             text-decoration: none;
         }
-        /* === SEÇÃO REVISTA CAROUSEL COM THUMBNAILS === */
+        
         #revista { padding: 100px 0; background-color: var(--cor-fundo-alternativo); overflow: hidden;}
         .carousel-wrapper { max-width: 900px; margin: 0 auto; position: relative; }
         .carousel-main-container {
@@ -409,11 +423,11 @@
         }
         .carousel-slide img {
             width: 100%;
-            height: auto; /* Alterado de 500px para auto */
-            object-fit: contain; /* Alterado de cover para contain */
+            height: auto;
+            object-fit: contain;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            cursor: pointer; /* Adicionado para indicar que é clicável */
-            display: block; /* Garante que a imagem se comporte como bloco */
+            cursor: pointer;
+            display: block;
         }
         .carousel-thumbs-container {
             display: flex; gap: 10px; margin-top: 15px;
@@ -429,7 +443,7 @@
         .thumb-item.active { border-color: var(--cor-principal); opacity: 1; }
         .thumb-item img { width: 100%; height: 100%; object-fit: cover; }
         .carousel-button {
-            position: absolute; top: 50%; /* Centralizado verticalmente */
+            position: absolute; top: 50%;
             transform: translateY(-50%);
             background-color: rgba(255, 255, 255, 0.5); backdrop-filter: blur(4px);
             border: 1px solid rgba(255, 255, 255, 0.7); border-radius: 50%;
@@ -444,9 +458,11 @@
          @media (min-width: 769px) {
             .carousel-button { display: flex; align-items: center; justify-content: center; }
         }
-        /* === RESPONSIVIDADE === */
+        
         @media (max-width: 992px) {
-            .sobre-content, .filosofia-wrapper, .contato-wrapper, .cabelos-content { grid-template-columns: 1fr; }
+            .sobre-content, .filosofia-wrapper, .contato-wrapper, .cabelos-content, .servicos-grid { 
+                grid-template-columns: 1fr; 
+            }
             .sobre-img { order: -1; height: 400px; }
             .cabelos-img { height: 400px; }
             .filosofia-sticky-col { position: static; }
@@ -458,11 +474,10 @@
             .header { padding: 10px 0; }
             .header .navbar > .nav-links { display: none; }
             .hamburger { display: block; }
-            .hero, #agendamento-final { background-attachment: scroll; } /* Efeito parallax desativado no mobile para performance */
+            .hero, #agendamento-final { background-attachment: scroll; }
             .hero h1 { font-size: 3rem; }
-            #sobre, #servicos, #trinks, #pilares, #filosofia, #galeria, #faq, #contato, #agendamento-final, #cabelos, #revista { padding: 80px 0; }
+            #sobre, #servicos, #trinks, #pilares, #filosofia, #galeria, #faq, #contato, #agendamento-final, #cabelos, #revista, #localizacao { padding: 80px 0; }
             .section-title { font-size: 2.5rem; }
-            .servicos-wrapper img { max-width: 100%; }
             .gallery-container { column-count: 2; }
             .pilar-card { flex-direction: column; text-align: center; }
             .pilar-content h3 { font-size: 2rem; }
@@ -500,6 +515,7 @@
             <li><a href="#galeria">Galeria</a></li>
             <li><a href="#faq">Dúvidas</a></li>
             <li><a href="#contato">Contato</a></li>
+            <li><a href="#localizacao">Onde Estamos</a></li>
         </ul>
     </div>
 
@@ -517,18 +533,48 @@
                 <div class="animate-on-scroll"><img src="img/sobr.png" alt="Kamilla Karajá" class="sobre-img"></div>
                 <div class="sobre-texto animate-on-scroll">
                     <div class="text-center-wrapper" style="text-align: left; margin-bottom: 20px;"><h2 class="section-title" style="font-size: 3rem; margin-bottom: 0;">Sobre a Karajá</h2></div>
-                    <p>Prazer, meu nome é <strong>Kamilla Karajá</strong>. Com 29 anos, trago na alma e no sobrenome a força do meu povo, originário da aldeia Santa Isabel, em Mato Grosso. Minha paixão pela estética começou aos 12 anos e, hoje, em Mogi das Cruzes, essa jornada floresce na <strong>Karajá Esmalteria</strong>.</p>
-                    <p>Acredito que a beleza é uma forma de expressão e poder. Minha missão é mais do que criar unhas perfeitas; é reacender o brilho no olhar e fortalecer a autoestima de cada cliente, unindo técnicas modernas com a riqueza da minha herança indígena.</p>
+                    <p>Prazer, sou <strong>Kamilla Karajá</strong>. Em meu nome e em minha alma, carrego a história e a força do meu povo, originário da aldeia Santa Isabel, em Mato Grosso. A paixão por realçar a beleza nasceu comigo e, aos 12 anos, começou a se tornar meu caminho. Hoje, em Mogi das Cruzes, essa jornada floresce na <strong>Karajá Esmalteria</strong>, um espaço que é a extensão das minhas raízes.</p>
+                    <p>Para mim, a beleza é um ato de poder e expressão. Minha missão transcende a busca por unhas perfeitas; é sobre reacender o brilho no olhar, resgatar a autoconfiança e conectar cada mulher à sua própria essência, unindo a precisão das técnicas modernas com a riqueza atemporal da minha herança indígena.</p>
                 </div>
             </div>
         </section>
         
         <section id="servicos">
             <div class="container">
-                <div class="text-center-wrapper animate-on-scroll"><h2 class="section-title">Nossos Serviços de Unhas</h2></div>
-                <div class="servicos-wrapper animate-on-scroll">
-                    <img src="img/Karaha.png" alt="Menu de Serviços de Alongamento">
-                    <img src="img/Kraha2.png" alt="Menu de Serviços Express e SPA dos Pés">
+                <div class="text-center-wrapper animate-on-scroll">
+                    <h2 class="section-title">Nossos Serviços de Unhas</h2>
+                </div>
+                <div class="servicos-grid">
+                    <div class="cabelos-texto animate-on-scroll">
+                        <h4>Unhas Express & SPA</h4>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Corte e lixamento</li>
+                            <li><i class="fas fa-check"></i> Esmaltação básica</li>
+                            <li><i class="fas fa-check"></i> Manicure e pedicure completa</li>
+                            <li><i class="fas fa-check"></i> SPA dos Pés (Esfoliação, hidratação e mais)</li>
+                        </ul>
+                        <h4>Adicionais</h4>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Adesivos e Pedrarias</li>
+                            <li><i class="fas fa-check"></i> Francesinha tradicional</li>
+                            <li><i class="fas fa-check"></i> Pós especiais e decorações</li>
+                        </ul>
+                    </div>
+                    <div class="cabelos-texto animate-on-scroll">
+                        <h4>Alongamentos</h4>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Fibra de vidro</li>
+                            <li><i class="fas fa-check"></i> Molde F1 e Tips Express</li>
+                            <li><i class="fas fa-check"></i> Blindagem de alta resistência</li>
+                            <li><i class="fas fa-check"></i> Formato Hiper Realista</li>
+                        </ul>
+                        <h4>Esmaltação em Gel & Manutenção</h4>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Esmaltação em gel para mãos e pés</li>
+                            <li><i class="fas fa-check"></i> Encapsulados e Francesinha sorriso</li>
+                            <li><i class="fas fa-check"></i> Manutenção e remoção segura de todos os tipos de alongamentos</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
@@ -573,7 +619,7 @@
             <div class="pilares-container">
                 <div class="pilar-card animate-on-scroll"><div class="pilar-content"><h3>Ancestralidade</h3><p>Na Karajá Esmalteria, celebramos a beleza que atravessa gerações. A ancestralidade vive em cada detalhe, em cada cuidado, em cada gesto de acolhimento. Honramos as raízes que nos trouxeram até aqui — a força das mulheres que vieram antes, a sabedoria do tempo e o respeito pela nossa história. Cuidar de si também é um ato de conexão com quem somos e com tudo que nos formou.</p></div></div>
                 <div class="pilar-card animate-on-scroll"><div class="pilar-content"><h3>Autoestima</h3><p>A autoestima da mulher floresce no cuidado com si mesma. Aqui, cada toque revela força, beleza e identidade. Deixe suas unhas falarem por você.</p></div></div>
-                <div class="pilar-card animate-on-scroll"><div class="pilar-content"><h3>Excelência</h3><p>Na Karajá Esmalteria, excelência é a nossa essência. Do atendimento ao acolhimento, cada detalhe é pensado com carinho e profissionalismo. Trabalhamos com produtos de alta qualidade e entregamos um resultado impecável porque para nós, beleza é cuidado, respeito e compromisso com você.</p></div></div>
+                <div class="pilar-card animate-on-scroll"><div class="pilar-contenot"><h3>Excelência</h3><p>Na Karajá Esmalteria, excelência é a nossa essência. Do atendimento ao acolhimento, cada detalhe é pensado com carinho e profissionalismo. Trabalhamos com produtos de alta qualidade e entregamos um resultado impecável porque para nós, beleza é cuidado, respeito e compromisso com você.</p></div></div>
             </div>
         </section>
         
@@ -692,6 +738,17 @@
         </section>
     </main>
     
+    <section id="localizacao">
+        <div class="container animate-on-scroll">
+            <div class="text-center-wrapper">
+                <h2 class="section-title">Onde Nos Encontrar</h2>
+            </div>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658.172283997469!2d-46.18881028554238!3d-23.526421884699863!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce7b309eb18933%3A0x940f94e9b5123e5a!2sMogi%20Shopping!5e0!3m2!1spt-BR!2sbr!4v1678886512345!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
     <section id="agendamento-final">
         <div class="container animate-on-scroll">
             <h2>Pronta para a Transformação?</h2>
@@ -717,7 +774,7 @@
                     <a href="https://www.instagram.com/karajaesmalteria/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
-            <div class="footer-bottom"><p>&copy; 2025 Karajá Esmalteria. Todos os direitos reservados. | Desenvolvido por <a href="https://api.whatsapp.com/send?phone=5511960573657&text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20os%20seus%20serviços" target="_blank">Lucas Cabral</a></p></div>
+            <div class="footer-bottom"><p>© 2025 Karajá Esmalteria. Todos os direitos reservados. | Desenvolvido por <a href="https://api.whatsapp.com/send?phone=5511960573657&text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20os%20seus%20serviços" target="_blank">Lucas Cabral</a></p></div>
         </div>
     </footer>
 
@@ -811,7 +868,6 @@
             window.open(whatsappUrl, '_blank');
         });
 
-        // === LÓGICA DO LIGHTBOX DA GALERIA ===
         const lightbox = document.getElementById('lightbox-modal');
         const lightboxImg = document.getElementById('lightbox-img');
         const galleryItems = document.querySelectorAll('.gallery-item');
@@ -839,7 +895,6 @@
             }
         });
 
-        // === LÓGICA PARA ABRIR LIGHTBOX NO CAROUSEL DA REVISTA ===
         const carouselImages = document.querySelectorAll('.carousel-slide img');
         carouselImages.forEach(img => {
             img.addEventListener('click', () => {
@@ -850,7 +905,6 @@
             });
         });
         
-        // === LÓGICA DO CAROUSEL COM THUMBNAILS DA REVISTA ===
         const mainCarousel = document.querySelector('.carousel-main-container');
         if (mainCarousel) {
             const slides = document.querySelectorAll('.carousel-slide');
@@ -875,7 +929,7 @@
                         behavior: 'smooth'
                     });
                     activeIndex = index;
-                    updateActiveThumb(index, true); // Scroll only on user interaction
+                    updateActiveThumb(index, true);
                 }
             };
 
@@ -888,13 +942,13 @@
 
             prevButton.addEventListener('click', () => {
                 let newIndex = activeIndex - 1;
-                if (newIndex < 0) newIndex = slides.length - 1; // Loop
+                if (newIndex < 0) newIndex = slides.length - 1;
                 goToSlide(newIndex);
             });
 
             nextButton.addEventListener('click', () => {
                 let newIndex = activeIndex + 1;
-                if (newIndex >= slides.length) newIndex = 0; // Loop
+                if (newIndex >= slides.length) newIndex = 0;
                 goToSlide(newIndex);
             });
 
